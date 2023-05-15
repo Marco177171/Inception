@@ -12,8 +12,7 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 	-subj "/C=IT/ST=Rome/L=Rome/O=42 School/OU=masebast/CN=masebast/"
 
 COPY ./conf/nginx.conf /etc/nginx/conf.d
-COPY ./index.html /var/www/html/index.html
-
+COPY ./index.html /var/www/html/
 # nginx config
 RUN mkdir -p /run/nginx
 
