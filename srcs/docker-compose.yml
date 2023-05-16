@@ -1,6 +1,9 @@
 version '3'
 
 services:
+
+  # MANDATORY
+
   nginx:
     container_name: nginx
     build: ./required/nginx
@@ -15,4 +18,54 @@ services:
     restart: always
     networks:
       - network
+  mariadb:
+    container_name: mariadb
+    build: ./required/mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - network
+    restart: always
+    env_file:
+      - .env
+  wordpress:
+    container_name: wordpress
+    # create dependence relation between 2 containers. DB will be launched first
+    depends_on:
+      - mariadb
+    build:
+      context: ./required/wordpress
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - network
 
+    # BONUS
+
+    adminer:
+      container_name: hugo
+      # keep going here
+    hugo:
+    static_page:
+    
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/$USER/data/mysql
+      o: bind
+  wordpressa_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/$USER/data/wordpress
+      o: bind
+    
+networks:
+  network:
+    driver: bridge
