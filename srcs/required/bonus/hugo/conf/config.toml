@@ -1,0 +1,9 @@
+#baseURL = "https://$USER.42.it/me"
+
+theme = "m10c"
+paginate = 8
+canonifyURLs = true
+
+[params]
+  author = "Pesce Spazzacamini"
+  description = "Dedicated hugo service for inception project"
