@@ -1,9 +1,6 @@
-version '3'
+version: "3"
 
 services:
-
-  # MANDATORY
-
   nginx:
     container_name: nginx
     build: ./required/nginx
@@ -18,6 +15,7 @@ services:
     restart: always
     networks:
       - network
+
   mariadb:
     container_name: mariadb
     build: ./required/mariadb
@@ -28,6 +26,7 @@ services:
     restart: always
     env_file:
       - .env
+
   wordpress:
     container_name: wordpress
     # create dependence relation between 2 containers. DB will be launched first
@@ -45,12 +44,58 @@ services:
       - network
 
     # BONUS
+    redis:
+      container_name: redis
+      build: ./required/bonus/redis
+      depends_on:
+        - wordpress
+      ports:
+        - '6379:6379'
+      restart: always
+      env_file:
+        - .env
+      volumes:
+        - wordpress_data:/var/www/html
+      network:
+        - network
+
+    ftp_server:
+      container_name: ftp_server
+      build: ./required/bonus/ftp_server
+      ports:
+        - "21:21"
+        - "21100-21100:21100-21100"
+      volumes:
+        - "wordpress_data:/var/www/html"
+      networks:
+        - network
+      environment:
+        FTP_USR: ${FTP_USR}
+        FTP_PWD: ${FTP_PWD}
 
     adminer:
-      container_name: hugo
-      # keep going here
+      build: ./required/bonus/adminer
+      restart: always
+      depends_on:
+        - mariadb
+      expose:
+        "9000"
+      networks:
+        - network
+
     hugo:
+      container_name: hugo
+      build: ./required/bonus/hugo
+      restart: always
+      networks:
+        - network
+
     static_page:
+      container_name: static_page
+      build: ./requirements/bonus/static_page
+      restart: always
+      networks:
+        - network
     
 volumes:
   mariadb_data:
