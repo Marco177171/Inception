@@ -1,8 +1,8 @@
-FROM    alpine:3.15
+FROM    alpine:latest
 
 WORKDIR /var/hugo/static
 
-RUN apk update && apk upgrade
+RUN apk update && apk upgrade -y
 RUN apk add hugo git shadow
 RUN rm -f /var/cache/apk/
 

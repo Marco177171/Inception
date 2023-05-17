@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:latest
 
 RUN apk update && apk upgrade -y
 RUN apk add --no-cache -y vsftpd

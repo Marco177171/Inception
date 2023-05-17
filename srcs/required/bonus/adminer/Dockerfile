@@ -1,7 +1,6 @@
-FROM alpine:3.15.0
+FROM alpine:latest
 
-RUN apk update
-RUN apk upgrade -y
+RUN apk update && apk upgrade -y
 RUN apk add --no-cache \
 	curl less mariadb-client \
 	php8 php8-fpm php8-common \
