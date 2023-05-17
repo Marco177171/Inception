@@ -29,7 +29,6 @@ services:
 
   wordpress:
     container_name: wordpress
-    # create dependence relation between 2 containers. DB will be launched first
     depends_on:
       - mariadb
     build:
@@ -43,59 +42,58 @@ services:
     networks:
       - network
 
-    # BONUS
-    redis:
-      container_name: redis
-      build: ./required/bonus/redis
-      depends_on:
-        - wordpress
-      ports:
-        - '6379:6379'
-      restart: always
-      env_file:
-        - .env
-      volumes:
-        - wordpress_data:/var/www/html
-      network:
-        - network
+  redis:
+    container_name: redis
+    build: ./required/bonus/redis
+    depends_on:
+      - wordpress
+    ports:
+      - '6379:6379'
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - network
 
-    ftp_server:
-      container_name: ftp_server
-      build: ./required/bonus/ftp_server
-      ports:
-        - "21:21"
-        - "21100-21100:21100-21100"
-      volumes:
-        - "wordpress_data:/var/www/html"
-      networks:
-        - network
-      environment:
-        FTP_USR: ${FTP_USR}
-        FTP_PWD: ${FTP_PWD}
+  ftp_server:
+    container_name: ftp_server
+    build: ./required/bonus/ftp_server
+    ports:
+      - "21:21"
+      - "21100-21100:21100-21100"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - network
+    environment:
+      FTP_USR: ${FTP_USR}
+      FTP_PWD: ${FTP_PWD}
 
-    adminer:
-      build: ./required/bonus/adminer
-      restart: always
-      depends_on:
-        - mariadb
-      expose:
-        "9000"
-      networks:
-        - network
+  adminer:
+    build: ./required/bonus/adminer
+    restart: always
+    depends_on:
+      - mariadb
+    expose:
+      - "9000"
+    networks:
+      - network
 
-    hugo:
-      container_name: hugo
-      build: ./required/bonus/hugo
-      restart: always
-      networks:
-        - network
+  hugo:
+    container_name: hugo
+    build: ./required/bonus/hugo
+    restart: always
+    networks:
+      - network
 
-    static_page:
-      container_name: static_page
-      build: ./requirements/bonus/static_page
-      restart: always
-      networks:
-        - network
+  static_page:
+    container_name: static_page
+    build: ./requirements/bonus/static_page
+    restart: always
+    networks:
+      - network
     
 volumes:
   mariadb_data:
@@ -110,7 +108,7 @@ volumes:
       type: none
       device: /home/$USER/data/wordpress
       o: bind
-    
+ 
 networks:
   network:
     driver: bridge
