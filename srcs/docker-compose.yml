@@ -100,13 +100,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/$USER/data/mysql
+      device: /home/marco/data/mysql
       o: bind
   wordpress_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/$USER/data/wordpress
+      device: /home/marco/data/wordpress
       o: bind
  
 networks:
