@@ -8,6 +8,7 @@ all:
 down:
 	@docker compose -f ./srcs/docker-compose.yml down
 	@docker volume rm -f $$(docker volume ls -q)
+	@docker image rm -f $$(docker image ls -q)
 
 re:
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
