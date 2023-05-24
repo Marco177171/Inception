@@ -40,5 +40,5 @@ WORKDIR /var/www/html
 EXPOSE 9000
 
 # launch php fpm in foreground, ignoring daemonize from configuration file
-CMD ["/usr/bin/php-fpm7.3", "-F"]
+CMD ["/usr/bin/php-fpm8.1", "-F"]
 
