@@ -36,4 +36,4 @@ COPY ./conf/www.conf /etc/php-fpm.d/www.conf
 EXPOSE 9000
 STOPSIGNAL SIGQUIT
 
-CMD ["php-fpm8", "--nodaemonize"]
+CMD ["php-fpm", "--nodaemonize"]
