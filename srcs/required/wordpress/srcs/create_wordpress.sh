@@ -1,3 +1,5 @@
+#!/bin/sh
+
 if [-f ./wp_config.php]
 then
 	echo "wordpress already installed"
