@@ -31,9 +31,11 @@ RUN mkdir -p /var/www/html
 RUN mv ./adminer-4.8.1.php /var/www/html/index.php
 RUN adduser -u 82 -D -S -G www-data www-data
 
-COPY ./conf/www.conf /etc/php-fpm.d/www.conf
+COPY ./conf/www.conf /etc/php8-fpm.d/www.conf
 
 EXPOSE 9000
 STOPSIGNAL SIGQUIT
 
-CMD ["php-fpm8", "--nodaemonize"]
+ENTRYPOINT [/etc/init.d/php-fpm]
+
+CMD ["php-fpm", "--nodaemonize"]

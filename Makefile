@@ -1,13 +1,16 @@
 all:
 	@docker pull debian:buster
 	@docker pull alpine:latest
+	@docker volume create --name srcs_mariadb_data
+	@docker volume create --name srcs_wordpress_data
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
 	@docker compose -f ./srcs/docker-compose.yml down
+	@docker volume rm -f $$(docker volume ls -q)
 
 re:
-	@docker compose -f srcs/docker-compose.yml up -d --build
+	@docker compose -f ./srcs/docker-compose.yml up -d --build
 
 clean:
 	@docker stop $$(docker ps -qa);\

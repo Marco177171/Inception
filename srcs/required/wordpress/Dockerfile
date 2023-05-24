@@ -26,7 +26,7 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 
 # create the folder to enable php start
-RUN mkdir /run/php
+RUN mkdir -p /run/php
 
 # copy the shell script to create and launch wordpress
 COPY ./srcs/create_wordpress.sh /usr/local/bin

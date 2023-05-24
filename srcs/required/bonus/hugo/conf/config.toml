@@ -1,4 +1,4 @@
-#baseURL = "https://$USER.42.it/me"
+baseURL = "https://masebast.42.fr/me"
 
 theme = "m10c"
 paginate = 8
