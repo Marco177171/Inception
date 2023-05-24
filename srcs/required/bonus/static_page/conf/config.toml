@@ -1,4 +1,4 @@
-#baseURL = "https://$USER.42.fr/static"
+#baseURL = "https://masebast.fr/static"
 title = "Inception Hugo page"
 theme = "m10c"
 paginate = 8
