@@ -1,7 +1,9 @@
 FROM alpine:latest
 
-RUN apk update && apk upgrade
-RUN apk add --no-cache \
+# install prerequisites
+# https://wordpress.com/support/php-environment/
+RUN apk update && apk update
+RUN apk add \
 	curl \
 	less \
 	mariadb-client \
@@ -26,14 +28,15 @@ RUN apk add --no-cache \
 	php-dom \
 	php-simplexml
 
+#RUN the adminer part, create html directory, move the adminer directory and add user
 RUN curl -L -O https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php
 RUN mkdir -p /var/www/html
 RUN mv ./adminer-4.8.1.php /var/www/html/index.php
 RUN adduser -u 82 -D -S -G www-data www-data
 
-COPY ./conf/www.conf /etc/php-fpm.d/www.conf
+COPY /conf/www.conf /etc/php/php-fpm.d/www.conf
 
 EXPOSE 9000
 STOPSIGNAL SIGQUIT
 
-CMD ["php-fpm", "--nodaemonize"]
+CMD ["php", "--nodaemonize"]
