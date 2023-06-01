@@ -23,7 +23,7 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
 # copy the configuration file in the www directory
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
+COPY ./conf/www.conf /etc/php/8.1/fpm/pool.d
 
 # create the folder to enable php start
 RUN mkdir -p /run/php
@@ -40,5 +40,4 @@ WORKDIR /var/www/html
 EXPOSE 9000
 
 # launch php fpm in foreground, ignoring daemonize from configuration file
-CMD ["/usr/bin/php-fpm8.1", "-F"]
-
+CMD ["/etc/php-fpm", "-F"]
