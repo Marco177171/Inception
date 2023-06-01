@@ -9,7 +9,6 @@ RUN apt-get install -y \
 	php-cgi \
 	php-mysql \
 	php-fpm \
-	php-pdo \
 	php-gd \
 	php-cli \
 	php-mbstring \
@@ -40,4 +39,4 @@ WORKDIR /var/www/html
 EXPOSE 9000
 
 # launch php fpm in foreground, ignoring daemonize from configuration file
-CMD ["/etc/php-fpm", "-F"]
+CMD ["/usr/sbin/php-fpm7.3", "-F"]

@@ -17,10 +17,10 @@ canonifyURLs = true
     weight = 2
 
 [params]
-  author = "masebast sebastiani"
+  author = "marco sebastiani"
   description = "a spongysponge"
   menu_item_separator = " - "
   [[params.social]]
     icon = "github"
     name = "Github"
-    url = "https://github.com/masebast177171"
+    url = "https://github.com/Marco177171"

@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   nginx:
@@ -63,7 +63,7 @@ services:
       - network
 
   ftp-server:
-    build: required/bonus/ftp_server
+    build: ./required/bonus/ftp_server
     container_name: ftp-server
     ports:
       - "21:21"
@@ -106,13 +106,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/masebast/data/mysql
+      device: /home/marco/data/mysql
       o: bind
   wordpress_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/masebast/data/wordpress
+      device: /home/marco/data/wordpress
       o: bind
 
 networks:
