@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   nginx:
@@ -9,7 +9,7 @@ services:
       - redis
       - hugo
     ports:
-      - 443:443
+      - '443:443'
     volumes:
       - wordpress_data:/var/www/html
     restart: always
@@ -35,9 +35,10 @@ services:
     #Create a depedency between the 2 container, db will be launched before
     depends_on:
       - mariadb
+    ports:
+      - 9000:9000
     build:
       context: ./required/wordpress
-      dockerfile: Dockerfile
     restart: always
     env_file:
       - .env
@@ -66,10 +67,10 @@ services:
     build: ./required/bonus/ftp_server
     container_name: ftp-server
     ports:
-      - "21:21"
-      - "21100-21110:21100-21110"
+      - '21:21'
+      - '21100-21110:21100-21110'
     volumes:
-      - "wordpress_data:/var/www/html"
+      - wordpress_data:/var/www/html
     networks:
       - network
     restart: always
@@ -83,7 +84,7 @@ services:
     depends_on:
       - mariadb
     expose:
-     - "9000"
+     - '9000'
     networks:
       - network
 

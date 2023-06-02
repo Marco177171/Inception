@@ -33,4 +33,4 @@ COPY /conf/www.conf /etc/php/php-fpm.d/www.conf
 EXPOSE 9000
 STOPSIGNAL SIGQUIT
 
-CMD ["/usr/sbin/php-fpm7.3", "-F"]
+CMD ["/usr/sbin/php-fpm", "-F"]
